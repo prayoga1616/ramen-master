@@ -18,7 +18,7 @@ export function addOrder(s,recipeIndex){
   const used=s.orders.map(o=>o.seat);const seat=[0,1,2].find(n=>!used.includes(n));
   s.orders.push({id:s.nextId++,recipe,seat,remaining:limit,limit,mood:Math.floor(s.random()*4)});
 }
-export function startGame(s){Object.assign(s,createGame(s.seed));s.screen='play';addOrder(s,0);s.message='1 NOODLES → 2 BROTH → TOPPINGS → E SERVE';}
+export function startGame(s){const muted=s.muted;Object.assign(s,createGame(s.seed));s.muted=muted;s.screen='play';addOrder(s,0);s.message='1 NOODLES → 2 BROTH → TOPPINGS → E SERVE';}
 export function notify(s,message){s.message=message;s.messageTime=3;s.flash=0.25;}
 export function isReady(s){const o=s.orders[s.selected];return !!o&&o.recipe.items.length===s.bowl.length&&o.recipe.items.every(i=>s.bowl.includes(i));}
 export function ingredient(s,i){

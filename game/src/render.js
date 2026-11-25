@@ -44,6 +44,10 @@ export function drawKitchen(c,s,t){
   panel(c,832,616,328,117,'#20333d',isReady(s)?'#91dcc0':'#5d7778');
   text(c,isReady(s)?'PLATE READY TO SERVE':s.bowl.length?'BOWL IN PROGRESS':'YOUR EMPTY BOWL',996,632,13,isReady(s)?'#a2e5c6':'#c2b99e','center');
   bowl(c,995,683,s.bowl,1.28,t);
+  if(!s.shot&&s.flash>0&&s.action&&s.bowl.includes(s.action-1)){
+    const from=STATIONS[s.action-1],progress=1-s.flash/.25;
+    food(c,s.action-1,from.x+51+(995-from.x-51)*progress,655-Math.sin(progress*Math.PI)*92,1-progress*.3);
+  }
   if(s.bowl.length){rect(c,1051,659,54,4,'#e6bd79');rect(c,1051,668,54,4,'#e6bd79');}
   const o=s.orders[s.selected];
   text(c,`[R] RESET BOWL`,49,757,12,'#d3b391');text(c,'1–7 ADD  •  ← → SELECT ORDER',420,757,12,'#b2c2b5','center');
